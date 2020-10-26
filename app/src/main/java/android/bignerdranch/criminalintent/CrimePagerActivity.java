@@ -18,18 +18,13 @@ import java.util.List;
 import java.util.UUID;
 
 public class CrimePagerActivity extends AppCompatActivity {
-    private static final String EXTRA_CRIME_ID =
-            "com.bignerdracnh.android.criminalintent.crime_id";
+    private static final String EXTRA_CRIME_ID = "com.bignerdracnh.android.criminalintent.crime_id";
 
     private ViewPager mViewPager;
     private List<Crime> mCrimes;
-    private Button mFirst;
-    private Button mLast;
 
     public static Intent newIntent(Context packageContext, UUID crimeId) {
-        Intent intent = new Intent(packageContext, CrimePagerActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, crimeId);
-        return intent;
+        return new Intent(packageContext, CrimePagerActivity.class).putExtra(EXTRA_CRIME_ID, crimeId);
     }
 
     @Override

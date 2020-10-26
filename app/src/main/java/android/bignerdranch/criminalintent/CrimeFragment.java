@@ -31,6 +31,7 @@ public class CrimeFragment extends Fragment {
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
+    private Button mDeleteCrime;
     private Button mTimeButton;
     private CheckBox mSolvedCheckBox;
 
@@ -48,6 +49,11 @@ public class CrimeFragment extends Fragment {
 
     private void updateTime() {
         mTimeButton.setText(new SimpleDateFormat("k : mm").format(mCrime.getDate()));
+    }
+
+    private void deleteCrime() {
+        CrimeLab.get(getActivity()).deleteCrime(mCrime.getId());
+        getActivity().finish();
     }
 
     @Override
@@ -80,6 +86,8 @@ public class CrimeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
+        mDeleteCrime = v.findViewById(R.id.delete_crime);
+        mDeleteCrime.setOnClickListener(view -> deleteCrime());
         mTitleField = v.findViewById(R.id.crime_title);
         mTitleField.setText(mCrime.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
