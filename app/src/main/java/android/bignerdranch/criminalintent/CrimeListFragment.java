@@ -204,17 +204,8 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onItemMove(int fromPosition, int toPosition) {
-            if (fromPosition < toPosition) {
-                for (int i = fromPosition; i < toPosition; i++) {
-                    CrimeLab.get(getActivity()).swapCrimes(mCrimes.get(i),mCrimes.get(i + 1));
-                    Collections.swap(mCrimes, i, i + 1);
-                }
-            } else {
-                for (int i = fromPosition; i > toPosition; i--) {
-                    CrimeLab.get(getActivity()).swapCrimes(mCrimes.get(i),mCrimes.get(i - 1));
-                    Collections.swap(mCrimes, i, i - 1);
-                }
-            }
+            CrimeLab.get(getActivity()).swapCrimes(mCrimes.get(fromPosition),mCrimes.get(toPosition));
+            Collections.swap(mCrimes, fromPosition, toPosition);
             notifyItemMoved(fromPosition, toPosition);
         }
     }
