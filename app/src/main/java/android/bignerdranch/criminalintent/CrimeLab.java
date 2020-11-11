@@ -72,8 +72,21 @@ public class CrimeLab {
                 new String[]{uuidString});
     }
 
+    public void swapCrimes(Crime first, Crime second) {
+        Crime temp = new Crime();
+        mDatabase.update(CrimeTable.NAME, getContentValues(temp),
+                CrimeTable.Cols.UUID + " = ?",
+                new String[]{first.getId().toString()});
+        mDatabase.update(CrimeTable.NAME, getContentValues(first),
+                CrimeTable.Cols.UUID + " = ?",
+                new String[]{second.getId().toString()});
+        mDatabase.update(CrimeTable.NAME, getContentValues(second),
+                CrimeTable.Cols.UUID + " = ?",
+                new String[]{temp.getId().toString()});
+    }
+
     public void deleteCrime(UUID id) {
-        mDatabase.delete(CrimeTable.NAME, CrimeTable.Cols.UUID + " = ?", new String[] {id.toString()});
+        mDatabase.delete(CrimeTable.NAME, CrimeTable.Cols.UUID + " = ?", new String[]{id.toString()});
     }
 
     public CrimeCursorWrapper queryCrimes(String whereClause, String[] whereArgs) {
